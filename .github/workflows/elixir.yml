@@ -6,47 +6,24 @@ env:
 
 # https://github.com/elixir-lang/elixir/blob/master/lib/elixir/pages/compatibility-and-deprecations.md
 jobs:
-  elixir_1_12:
+  format_and_unit_test:
     runs-on: ubuntu-20.04
     name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     strategy:
       matrix:
-        otp: [22.x, 23.x, 24.x]
-        elixir: [1.12.x]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: erlef/setup-beam@v1
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-      - run: mix do deps.get, compile --warnings-as-errors
-      - run: mix format --dry-run --check-formatted
-      - run: mix test
-
-  elixir_1_11:
-    runs-on: ubuntu-20.04
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [21.x, 22.x, 23.x, 24.x]
-        elixir: [1.11.x]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: erlef/setup-beam@v1
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
-      - run: mix do deps.get, compile --warnings-as-errors
-      - run: mix format --dry-run --check-formatted
-      - run: mix test
-
-  elixir_1_10:
-    runs-on: ubuntu-20.04
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [21.x, 22.x, 23.x]
-        elixir: [1.10.x]
+        include:
+          - elixir: "1.15"
+            otp: "26"
+          - elixir: "1.14"
+            otp: "25"
+          - elixir: "1.13"
+            otp: "24"
+          - elixir: "1.12"
+            otp: "23"
+          - elixir: "1.11"
+            otp: "22"
+          - elixir: "1.10"
+            otp: "21"
     steps:
       - uses: actions/checkout@v2
       - uses: erlef/setup-beam@v1
