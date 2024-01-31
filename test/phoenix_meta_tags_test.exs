@@ -1,8 +1,9 @@
 defmodule PhoenixMetaTagsTest do
   use ExUnit.Case
+
+  use PhoenixHTMLHelpers
   use PhoenixMetaTags.TagView
 
-  import Phoenix.HTML.Tag
   doctest PhoenixMetaTags
 
   describe "render_tags_other/1" do
