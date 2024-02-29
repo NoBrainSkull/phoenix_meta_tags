@@ -1,5 +1,6 @@
 defmodule PhoenixMetaTags.TagView do
   alias PhoenixMetaTags.MapHelper
+  use PhoenixHTMLHelpers
 
   @moduledoc """
   This module render the tags struct to HTML meta tag.
